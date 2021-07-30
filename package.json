@@ -10,10 +10,11 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "typescript": "^4.3.5",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vue-class-component": "^8.0.0-0"
   },
   "devDependencies": {
+    "@vue/cli-plugin-typescript": "^4.5.13",
     "@typescript-eslint/eslint-plugin": "^4.28.5",
     "@typescript-eslint/parser": "^4.28.5",
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -22,11 +23,16 @@
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-vue": "^7.14.0",
     "node-sass": "^6.0.1",
     "sass": "^1.36.0",
-    "sass-loader": "^10.1.0"
+    "sass-loader": "^10.1.0",
+    "lint-staged": "^9.5.0",
+    "prettier": "^2.2.1",
+    "typescript": "~4.1.5"
   },
   "eslintConfig": {
     "root": true,
@@ -39,12 +45,13 @@
     ],
     "parserOptions": {
       "parser": "babel-eslint"
-    },
-    "rules": {}
+    }
   },
+  
   "prettier": {
     "tabWidth": 4,
-    "singleQuote": true
+    "singleQuote": true,
+    "trailingComma": "none"
   },
   "browserslist": [
     "> 1%",

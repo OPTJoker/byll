@@ -2,15 +2,16 @@
     <HomePage />
 </template>
 
-<script>
-import HomePage from './pages/home/HomePage';
+<script lang="ts">
+import { Options, Vue } from 'vue-class-component';
+import HomePage from '@/pages/home/HomePage.vue';
 
-export default {
-    name: 'App',
+@Options({
     components: {
         HomePage
     }
-};
+})
+export default class App extends Vue {}
 </script>
 
 <style>
@@ -25,7 +26,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin: 0;
-    padding: 0;
+    margin-top: 60px;
 }
 </style>
