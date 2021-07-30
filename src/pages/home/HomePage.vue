@@ -16,7 +16,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 const modules = [
     { name: '看书' },
     { name: '学习' },
@@ -25,6 +25,11 @@ const modules = [
 ];
 
 export default {
+    name: 'HomePage',
+    props: {
+        title: String
+    },
+
     data() {
         return {
             modules: modules
