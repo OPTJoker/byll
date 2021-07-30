@@ -17,11 +17,24 @@
 </template>
 
 <script lang="ts">
+interface HomeModuleConfig {
+    name: string;
+    desc: string;
+}
+
+const createModule = (name: string) => {
+    const m: HomeModuleConfig = {
+        name,
+        desc: '描述信息'
+    };
+    return m;
+};
+debugger
 const modules = [
-    { name: '看书' },
-    { name: '学习' },
-    { name: '游戏' },
-    { name: '工具' }
+    createModule('看书'),
+    createModule('学习'),
+    createModule('游戏'),
+    createModule('工具')
 ];
 
 export default {

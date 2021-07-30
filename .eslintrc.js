@@ -6,7 +6,8 @@ module.exports = {
     },
     extends: [
         'eslint:recommended',
-        "plugin:vue/essential",
+        'plugin:vue/vue3-essential',
+        '@vue/typescript/recommended',
         "plugin:@typescript-eslint/eslint-recommended"
     ],
     globals: {
@@ -19,13 +20,19 @@ module.exports = {
         sourceType: "module"
     },
     plugins: [
+        'vue',
         "prettier",
-        "vue",
         "@typescript-eslint"
     ],
     rules: {
-        // 禁止或强制在代码块中开括号前和闭括号后有空格  { return 11 }
         "block-spacing": [2, "always"],
-        "prettier/prettier": "error"
+        "prettier/prettier": "error",
+        "fixToUnknown": true,
+        "allowTypedFunctionExpressions": true,
+        "allowArgumentsExplicitlyTypedAsAny": true,
+        "allowDirectConstAssertionInArrowFunctions": true,
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off"
     },
 }
