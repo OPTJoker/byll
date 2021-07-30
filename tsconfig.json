@@ -1,0 +1,22 @@
+{
+  "exclude": [
+         "node_modules"
+     ],
+     "include": [
+         "./src/**/*"
+     ],
+     "compilerOptions": {
+        "allowSyntheticDefaultImports": true, // 允许引入没有默认导出的模块
+        "module": "ES2020",
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "strict": true,
+        "target": "es6",
+        "lib": [
+          "dom",
+          "es6",
+          "es2020"
+        ],
+      }
+ }
