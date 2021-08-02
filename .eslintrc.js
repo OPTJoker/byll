@@ -26,11 +26,10 @@ module.exports = {
     ],
     rules: {
         "block-spacing": [2, "always"],
-        "prettier/prettier": "error",
-        "fixToUnknown": true,
-        "allowTypedFunctionExpressions": true,
-        "allowArgumentsExplicitlyTypedAsAny": true,
-        "allowDirectConstAssertionInArrowFunctions": true,
+        "prettier/prettier": 2,
+        "allowTypedFunctionExpressions": 0,
+        "allowArgumentsExplicitlyTypedAsAny": 0,
+        "allowDirectConstAssertionInArrowFunctions": 0,
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off"

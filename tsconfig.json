@@ -4,12 +4,13 @@
       "src/**/*.tsx",
       "src/**/*.vue",
       "tests/**/*.ts",
-      "tests/**/*.tsx"
+      "tests/**/*.tsx",
     ],
     "exclude": [
       "node_modules"
     ],
      "compilerOptions": {
+        "noImplicitAny": false,
         "target": "esnext",
         "module": "esnext",
         "strict": true,
@@ -24,14 +25,6 @@
         "allowSyntheticDefaultImports": true, // 允许引入没有默认导出的模块
         "removeComments": true,
         "preserveConstEnums": true,
-        "lib": [
-          "dom",
-          "es6",
-          "es2020",
-          "esnext",
-          "dom.iterable",
-          "scripthost"
-        ],
         "baseUrl": ".",
         "types": [
           "webpack-env"
@@ -40,7 +33,6 @@
           "@/*": [
             "src/*"
           ]
-        },
-
+        }
       }
  }
