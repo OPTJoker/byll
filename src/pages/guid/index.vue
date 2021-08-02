@@ -10,18 +10,20 @@
             />
             <div class="videoMask"></div>
         </div>
-        <div class="body">
-            <ModuleItem
-                v-for="(item, idx) in modules"
-                :key="idx"
-                :item="{
-                    name: item.routeName,
-                    pageName: item.pageName,
-                    path: item.path,
-                    index: idx
-                }"
-            >
-            </ModuleItem>
+        <div class="scaleBody">
+            <div class="body">
+                <ModuleItem
+                    v-for="(item, idx) in modules"
+                    :key="idx"
+                    :item="{
+                        name: item.routeName,
+                        pageName: item.pageName,
+                        path: item.path,
+                        index: idx
+                    }"
+                >
+                </ModuleItem>
+            </div>
         </div>
     </div>
 </template>
@@ -102,8 +104,12 @@ export default {
         }
     }
 
+    .scaleBody {
+        flex-direction: column;
+        justify-content: center;
+        transform: scale(0.7);
+    }
     .body {
-        background-color: transparent;
         justify-content: space-evenly;
         align-items: center;
     }
