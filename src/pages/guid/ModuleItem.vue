@@ -46,12 +46,11 @@ export default defineComponent({
         let didLoad = ref(false);
         const state = reactive({
             breathTraslate: computed(() => {
-                return props.item.index % 2 === 0
-                    ? String(Math.random() * 30 + 20) + 'px'
-                    : String(Math.random() * -20 - 30) + 'px';
+                const l = 120;
+                return String((Math.random() - 0.6) * l) + 'px';
             }),
             breathScale: computed(() => {
-                return Math.random() / 4.0 + 1;
+                return Math.random() / 5 + 1;
             }),
             marginTop: computed(() => {
                 return String(Math.random() * -100) + 'px';
@@ -60,9 +59,10 @@ export default defineComponent({
                 return String(Math.random() * 10) + 'px';
             }),
             breathDelay: computed(() => {
-                return props.item.index < 2
-                    ? String(Math.random() * 2) + 's'
-                    : String(Math.random() * 1) + 's';
+                return String(Math.random() * 1) + 's';
+            }),
+            braethTimeInterval: computed(() => {
+                return String(Math.random() * 2 + 4) + 's';
             })
         });
 
@@ -85,15 +85,15 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import '@/assets/styles/global.scss';
-$itemW: 180;
-$itemH: 360;
+$itemW: 240;
+$itemH: 240;
 
 .body {
     overflow: hidden;
     border-width: 0.5px;
     border-style: double;
     border-color: rgba($color: white, $alpha: 0.7);
-    border-radius: rem($itemW/3);
+    border-radius: rem($itemW/2);
     flex-direction: row;
     width: rem($itemW);
     height: rem($itemH);
@@ -116,24 +116,20 @@ $itemH: 360;
     }
 
     .body :hover {
-        background-color: rgba($color: cadetblue, $alpha: 0.3);
-        transition: 1.5s ease-in;
+        background-color: rgba($color: cadetblue, $alpha: 0.35);
+        transition: 0.5s ease-in;
     }
 
-    animation: breath 8s v-bind(breathDelay) infinite ease-in-out;
+    animation: breath v-bind(braethTimeInterval) v-bind(breathDelay) infinite
+        ease-in-out;
     @keyframes breath {
         from,
-        to,
-        50% {
+        to {
             transform: scale(1) translateY(0);
         }
-        25% {
+        50% {
             transform: scale(v-bind(breathScale))
                 translateY(v-bind(breathTraslate));
-        }
-        75% {
-            transform: scale(v-bind(breathScale))
-                translateY(calc(-1 * v-bind(breathTraslate)));
         }
     }
 }

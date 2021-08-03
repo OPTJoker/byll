@@ -105,13 +105,20 @@ export default {
     }
 
     .scaleBody {
+        width: 80%;
+        align-self: center;
+        height: inherit;
         flex-direction: column;
-        justify-content: center;
-        transform: scale(0.7);
+        justify-content: flex-start;
+        align-content: center;
+        // transform: scale(0.8);
     }
     .body {
+        flex-direction: row;
         justify-content: space-evenly;
-        align-items: center;
+        align-content: flex-start;
+        align-items: flex-start;
+        margin-top: 5%;
     }
 }
 </style>
