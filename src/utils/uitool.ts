@@ -12,7 +12,9 @@ const getRootFontSize = () => {
 
 const SetRootFontSize = () => {
     const dom = document.getElementsByTagName('html')[0];
-    dom.style.fontSize = DeviceWidth() / 10 + 'px';
+    const w = DeviceWidth();
+    const scale = w > 480 ? 20 : 10;
+    dom.style.fontSize = w / scale + 'px';
 };
 
 const rem = (px) => {

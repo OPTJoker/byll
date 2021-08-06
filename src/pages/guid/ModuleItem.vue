@@ -83,7 +83,7 @@ export default defineComponent({
 $itemSize: 80;
 
 .body {
-    overflow: hidden;
+    flex-shrink: 1;
     border-width: 0.5px;
     border-style: solid;
     border-color: rgba($color: white, $alpha: 0.4);
@@ -93,21 +93,14 @@ $itemSize: 80;
         align-items: center;
         width: rem($itemSize);
         height: rem($itemSize);
-        max-width: 240px;
-        max-height: 240px;
         background-color: rgba($color: white, $alpha: 0.1);
 
         .title {
             pointer-events: none;
-            font-size: rem(13);
-            font-weight: 200;
+            font-size: rem(18);
+            font-weight: 300;
             color: white;
         }
-    }
-
-    .body :hover {
-        background-color: rgba($color: cadetblue, $alpha: 0.35);
-        transition: 0.5s ease-in;
     }
 
     animation: breath v-bind(braethTimeInterval) infinite ease-in-out;
@@ -121,5 +114,10 @@ $itemSize: 80;
                 translateY(v-bind(breathTraslate));
         }
     }
+}
+
+.body :hover {
+    background-color: rgba($color: cadetblue, $alpha: 0.35);
+    transition: 0.5s ease-in;
 }
 </style>
