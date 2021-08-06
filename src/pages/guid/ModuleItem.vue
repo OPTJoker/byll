@@ -9,6 +9,7 @@
 </template>
 
 <script lang="ts">
+import { rem } from '@/utils/uitool';
 import {
     reactive,
     computed,
@@ -42,27 +43,26 @@ export default defineComponent({
             }
         }
     },
-    setup(props) {
+    setup() {
         let didLoad = ref(false);
         const state = reactive({
             breathTraslate: computed(() => {
                 const l = 120;
-                return String((Math.random() - 0.6) * l) + 'px';
+                const val = (Math.random() - 0.6) * l;
+                return rem(val);
             }),
             breathScale: computed(() => {
                 return Math.random() / 5 + 1;
             }),
             marginTop: computed(() => {
-                return String(Math.random() * -100) + 'px';
-            }),
-            breathTransY: computed(() => {
-                return String(Math.random() * 10) + 'px';
+                const val = Math.random() * -100;
+                return rem(val);
             }),
             breathDelay: computed(() => {
                 return String(Math.random() * 1) + 's';
             }),
             braethTimeInterval: computed(() => {
-                return String(Math.random() * 2 + 4) + 's';
+                return String(Math.random() * 3 + 3) + 's';
             })
         });
 
@@ -91,26 +91,25 @@ $itemH: 240;
 .body {
     overflow: hidden;
     border-width: 0.5px;
-    border-style: double;
-    border-color: rgba($color: white, $alpha: 0.7);
-    border-radius: rem($itemW/2);
-    flex-direction: row;
+    border-style: solid;
+    border-color: rgba($color: white, $alpha: 0.4);
+    border-radius: 0;
     width: rem($itemW);
     height: rem($itemH);
+    min-width: 80px;
+    min-height: 80px;
     margin-top: v-bind(marginTop);
 
     .moduleItem {
-        align-items: center;
         justify-content: center;
+        align-items: center;
         width: 100%;
         height: 100%;
-        border-radius: 20px;
         background-color: rgba($color: white, $alpha: 0.1);
 
         .title {
             pointer-events: none;
-            font-size: 28px;
-            font-weight: 400;
+            font-size: rem(40);
             color: white;
         }
     }

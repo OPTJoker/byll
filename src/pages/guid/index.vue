@@ -4,26 +4,27 @@
             <video
                 class="bgVideo"
                 :src="require('@/assets/videos/man_coffie.mp4')"
-                autoplay="autoplay"
-                muted="muted"
-                loop="loop"
+                autoplay
+                muted
+                loop
+                playsinline=""
+                webkit-playsinline=""
             />
             <div class="videoMask"></div>
         </div>
-        <div class="scaleBody">
-            <div class="body">
-                <ModuleItem
-                    v-for="(item, idx) in modules"
-                    :key="idx"
-                    :item="{
-                        name: item.routeName,
-                        pageName: item.pageName,
-                        path: item.path,
-                        index: idx
-                    }"
-                >
-                </ModuleItem>
-            </div>
+
+        <div class="guidBody">
+            <ModuleItem
+                v-for="(item, idx) in modules"
+                :key="idx"
+                :item="{
+                    name: item.routeName,
+                    pageName: item.pageName,
+                    path: item.path,
+                    index: idx
+                }"
+            >
+            </ModuleItem>
         </div>
     </div>
 </template>
@@ -79,46 +80,41 @@ export default {
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    color: black;
 
     .bgContainer {
+        top: 0;
+        margin: 0;
+        bottom: 0;
         position: absolute;
         z-index: -1;
-        width: inherit;
-        height: inherit;
+        width: 100vw;
+        height: 100vh;
 
         .bgVideo {
             object-fit: cover;
             width: 100%;
             height: 100%;
-            margin: 0;
-            padding: 0;
         }
-
         .videoMask {
+            position: absolute;
+            left: 0;
+            z-index: 2;
+            float: left;
             width: 100%;
             height: 100%;
-            position: absolute;
-            z-index: 2;
             background-color: rgba($color: #000000, $alpha: 0.6);
         }
     }
-
-    .scaleBody {
-        width: 80%;
-        align-self: center;
-        height: inherit;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-content: center;
-        // transform: scale(0.8);
-    }
-    .body {
-        flex-direction: row;
+    .guidBody {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        bottom: 0;
         justify-content: space-evenly;
-        align-content: flex-start;
-        align-items: flex-start;
-        margin-top: 5%;
+        align-content: center;
+        align-items: flex-end;
+        margin-bottom: rem(180);
     }
 }
 </style>
