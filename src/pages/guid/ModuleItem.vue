@@ -9,7 +9,6 @@
 </template>
 
 <script lang="ts">
-import { rem } from '@/utils/uitool';
 import {
     reactive,
     computed,
@@ -45,21 +44,17 @@ export default defineComponent({
     },
     setup() {
         let didLoad = ref(false);
+        const l = 80;
         const state = reactive({
             breathTraslate: computed(() => {
-                const l = 120;
-                const val = (Math.random() - 0.6) * l;
-                return rem(val);
+                const val = Math.random() * l;
+                return val + 'px';
             }),
             breathScale: computed(() => {
-                return Math.random() / 5 + 1;
-            }),
-            marginTop: computed(() => {
-                const val = Math.random() * -100;
-                return rem(val);
+                return Math.random() / 3 + 0.8;
             }),
             breathDelay: computed(() => {
-                return String(Math.random() * 1) + 's';
+                return String(Math.random()) + 's';
             }),
             braethTimeInterval: computed(() => {
                 return String(Math.random() * 3 + 3) + 's';
@@ -85,31 +80,27 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import '@/assets/styles/global.scss';
-$itemW: 240;
-$itemH: 240;
+$itemSize: 80;
 
 .body {
     overflow: hidden;
     border-width: 0.5px;
     border-style: solid;
     border-color: rgba($color: white, $alpha: 0.4);
-    border-radius: 0;
-    width: rem($itemW);
-    height: rem($itemH);
-    min-width: 80px;
-    min-height: 80px;
-    margin-top: v-bind(marginTop);
 
     .moduleItem {
         justify-content: center;
         align-items: center;
-        width: 100%;
-        height: 100%;
+        width: rem($itemSize);
+        height: rem($itemSize);
+        max-width: 240px;
+        max-height: 240px;
         background-color: rgba($color: white, $alpha: 0.1);
 
         .title {
             pointer-events: none;
-            font-size: rem(40);
+            font-size: rem(13);
+            font-weight: 200;
             color: white;
         }
     }
@@ -119,8 +110,7 @@ $itemH: 240;
         transition: 0.5s ease-in;
     }
 
-    animation: breath v-bind(braethTimeInterval) v-bind(breathDelay) infinite
-        ease-in-out;
+    animation: breath v-bind(braethTimeInterval) infinite ease-in-out;
     @keyframes breath {
         from,
         to {

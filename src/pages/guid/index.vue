@@ -106,7 +106,6 @@ export default {
         }
     }
     .guidBody {
-        display: flex;
         height: 100%;
         width: 100%;
         top: 0;
@@ -114,7 +113,8 @@ export default {
         justify-content: space-evenly;
         align-content: center;
         align-items: flex-end;
-        margin-bottom: rem(180);
+        margin-bottom: rem(80);
+        margin-top: rem(120);
     }
 }
 </style>

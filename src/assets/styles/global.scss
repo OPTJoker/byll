@@ -1,6 +1,6 @@
 @import './reset.scss';
 
 @function rem($px) {
-    $baseRem: 168;
+    $baseRem: 37.5;
     @return ($px/$baseRem) + rem
 }

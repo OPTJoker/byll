@@ -16,7 +16,7 @@ const SetRootFontSize = () => {
 };
 
 const rem = (px) => {
-    const baseRem = 168;
+    const baseRem = 37.5;
     return px / baseRem + 'rem';
 };
 
