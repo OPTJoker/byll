@@ -3,9 +3,12 @@ import App from './App.vue';
 import router from './router';
 import '@/assets/styles/reset.scss';
 import { SetRootFontSize } from '@/utils/uitool';
+// import ElementPlus from 'element-plus';
+// import 'element-plus/lib/theme-chalk/index.css';
 
 SetRootFontSize();
-createApp(App).use(router).mount('#app');
+const app = createApp(App);
+app.use(router).mount('#app');
 
 window.addEventListener('resize', () => {
     SetRootFontSize();
