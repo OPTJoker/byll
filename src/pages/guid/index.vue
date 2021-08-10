@@ -1,14 +1,9 @@
 <template>
     <div class="container">
         <div class="bgContainer">
-            <video
+            <img
                 class="bgVideo"
-                :src="require('@/assets/videos/man_coffie.mp4')"
-                autoplay
-                muted
-                loop
-                playsinline=""
-                webkit-playsinline=""
+                :src="require('@/assets/imgs/bg_travel.jpeg')"
             />
             <div class="videoMask"></div>
         </div>
@@ -102,7 +97,7 @@ export default {
             float: left;
             width: 100%;
             height: 100%;
-            background-color: rgba($color: #000000, $alpha: 0.6);
+            background-color: rgba($color: #000000, $alpha: 0.3);
         }
     }
     .guidBody {

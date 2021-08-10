@@ -93,7 +93,7 @@ $itemSize: 80;
         align-items: center;
         width: rem($itemSize);
         height: rem($itemSize);
-        background-color: rgba($color: white, $alpha: 0.1);
+        background-color: rgba($color: white, $alpha: 0.2);
 
         .title {
             pointer-events: none;
@@ -117,7 +117,7 @@ $itemSize: 80;
 }
 
 .body :hover {
-    background-color: rgba($color: cadetblue, $alpha: 0.35);
+    background-color: rgba($color: cadetblue, $alpha: 0.6);
     transition: 0.5s ease-in;
 }
 </style>
