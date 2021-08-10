@@ -81,7 +81,7 @@ $coverImgScale: 1.331;
                     .coverImg {
                         object-fit: fill;
                         width: inherit;
-                        height: rem(calc(80 * coverImgScale));
+                        height: rem(calc(80 * #{$coverImgScale}));
                     }
                     .title {
                         margin-top: rem(4);
