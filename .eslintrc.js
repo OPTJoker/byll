@@ -25,6 +25,7 @@ module.exports = {
         "@typescript-eslint"
     ],
     rules: {
+        "no-var-requires": true,
         "block-spacing": [2, "always"],
         "prettier/prettier": 2,
         "allowTypedFunctionExpressions": 0,

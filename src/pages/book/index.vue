@@ -1,8 +1,14 @@
 <template>
     <div class="container">
         <div class="window">
+            <e-book-render @closeEBook="closeEBookImp" id="eBookPage" :show="showEBook" :rendition="renditionRef" />
             <div class="bookList">
-                <div class="bookCard" v-for="(o, i) in books" :key="o.id">
+                <div
+                    :key="o.id"
+                    :onClick="onBookClick(i)"
+                    class="bookCard"
+                    v-for="(o, i) in books"
+                >
                     <div class="card-content-container">
                         <img :src="books[i].icon" class="coverImg" />
                         <span class="title">{{ books[i].name }}</span>
@@ -11,30 +17,75 @@
             </div>
         </div>
         <div class="tabBar">
-            <div class="tabItem" :onClick="onPress">书架</div>
+            <div class="tabItem" :onClick="onTabClick">书架</div>
             <div class="tabItem" />
-            <div class="tabItem" :onClick="onPress">书城</div>
+            <div class="tabItem" :onClick="onTabClick">书城</div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
+import { ref } from 'vue'
+import Epub from 'epubjs';
+import EBookRender from './bookRender.vue';
+
 export default {
     name: '电子书',
+    components: {
+        EBookRender
+    },
     setup() {
-        const book = {
+        const bookObj = {
             id: '10011',
             name: '三体全集',
             icon: require('@/assets/imgs/book_icon_santi.png'),
-            path: '@/assets/books/santi.epub'
+            url: '/santi.epub',
+            url2: 'https://img1.yunser.com/epub/test.epub'
         };
-        const books = [book, book, book, book];
-        const onPress = (e: any) => {
-            console.log(e.target?.innerText);
+        const books = [bookObj];
+        
+        const renditionRef: any = ref();
+        const percentage = ref(0);
+        const showEBook = ref(false);
+        const onBookClick = (i) => {
+            const item = books[i];
+            return () => {
+                const url1 = window.location.origin + item.url;
+                const book = Epub(url1);
+                book.ready.then(() => {  
+                    return book.locations.generate(0);
+                }).then(()=> {
+                    const lastPer = percentage.value;
+                    if (lastPer > 0.1) {
+                        const loc = book.locations?.cfiFromPercentage(lastPer/100.0);
+                        renditionRef.value.display(loc);
+                    }
+                });  
+                showEBook.value = true;
+
+                const rendition = book.renderTo('eBookPage');
+                rendition.themes.fontSize('18px');
+                renditionRef.value = rendition;
+
+                rendition.display();
+            };
+        };
+        const closeEBookImp = (val: {percentage: number}) => {
+            percentage.value = val.percentage;
+            showEBook.value = false;
+            renditionRef.value.destroy();
+        }
+
+        const onTabClick = () => {
+            //todo
         };
         return {
             books,
-            onPress
+            showEBook,
+            onTabClick,
+            onBookClick,
+            renditionRef,
+            closeEBookImp
         };
     }
 };
@@ -94,10 +145,13 @@ $coverImgScale: 1.331;
                     }
                 }
             }
-            &:after {
-                content: '';
-                flex: 1;
+            @media screen and (max-width: 420px) {
+                &:after {
+                    content: '';
+                    flex: 1;
+                }
             }
+
             .bookCard:nth-last-col {
                 margin-bottom: 0;
             }
@@ -107,7 +161,7 @@ $coverImgScale: 1.331;
     .tabBar {
         flex-direction: row;
         width: 100%;
-        height: rem(49);
+        height: rem(66);
         max-height: 68px;
         box-shadow: 0px -1px 12px rgba($color: #000000, $alpha: 0.1);
 
@@ -115,7 +169,7 @@ $coverImgScale: 1.331;
             flex-grow: 1;
             border-width: 1;
             border-style: solid;
-            font-size: rem(16);
+            font-size: rem(18);
             color: lightseagreen;
             align-items: center;
             justify-content: center;

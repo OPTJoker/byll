@@ -34,7 +34,6 @@ class ItemData {
 
 export default defineComponent({
     props: {
-        aa: ItemData,
         item: {
             type: ItemData,
             default: () => {
