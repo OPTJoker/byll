@@ -11,9 +11,14 @@
             </div>
         </div>
         <div class="bar" v-show="settingVisiable">
-            <el-slider class="slider" v-model="progress" :format-tooltip="formatProgress" step="0.1" @change="onProgressChange"></el-slider>
+            <el-slider
+                class="slider"
+                v-model="progress"
+                :format-tooltip="formatProgress"
+                step="0.1"
+                @change="onProgressChange"
+            ></el-slider>
         </div>
-        
     </div>
 </template>
 
@@ -26,51 +31,54 @@ export default {
     props: {
         show: Boolean,
         closeEBook: Function,
-        rendition: Rendition,
+        rendition: Rendition
     },
     emits: ['closeEBook'],
     setup(props, ctx) {
-
         const renditionRef = () => {
             return props.rendition;
-        }
+        };
 
         const settingVisiable = ref(false);
         const progress = ref(0);
         const onBackClick = (percentage: number) => {
             return () => {
                 showOrHideSetting();
-                ctx.emit("closeEBook", {percentage});
-            }
+                ctx.emit('closeEBook', { percentage });
+            };
         };
         const next = () => {
             !hideSetting() && renditionRef()?.next();
-        }
+        };
         const prev = () => {
             !hideSetting() && renditionRef()?.prev();
-        }
+        };
         const showOrHideSetting = () => {
             settingVisiable.value = !settingVisiable.value;
-            settingVisiable.value && (progress.value = props.rendition?.currentLocation()?.start?.percentage*100); //d.ts声明的数据结构已过时。这个才是对的
-        }
+            settingVisiable.value &&
+                (progress.value =
+                    props.rendition?.currentLocation()?.start?.percentage *
+                    100); //d.ts声明的数据结构已过时。这个才是对的
+        };
         const hideSetting = () => {
             const res = settingVisiable.value;
             settingVisiable.value = false;
             return res;
-        }
+        };
 
         const onProgressChange = (val) => {
-            const percent = val/100 || 0;
-            
+            const percent = val / 100 || 0;
+
             const ref = renditionRef();
             const locations = ref?.book?.locations;
-            const loc = percent > 0 ? locations?.cfiFromPercentage(percent) : '0';
+            const loc =
+                percent > 0 ? locations?.cfiFromPercentage(percent) : '0';
             ref?.display(loc);
-        }
+        };
 
         const formatProgress = (val: number) => {
-            return val+' %';
-        }
+            return val + ' %';
+        };
         return {
             next,
             prev,
@@ -80,7 +88,7 @@ export default {
             formatProgress,
             settingVisiable,
             onProgressChange,
-            showOrHideSetting,
+            showOrHideSetting
         };
     }
 };
@@ -102,7 +110,8 @@ export default {
         width: 100%;
         height: 100%;
 
-        .left, .right {
+        .left,
+        .right {
             width: 35%;
             height: 100%;
         }
@@ -120,7 +129,7 @@ export default {
         width: 100%;
         height: rem(60);
         background-color: aquamarine;
-        
+
         .back {
             width: rem(40);
             height: rem(40);

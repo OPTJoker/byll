@@ -1,7 +1,12 @@
 <template>
     <div class="container">
         <div class="window">
-            <e-book-render @closeEBook="closeEBookImp" id="eBookPage" :show="showEBook" :rendition="renditionRef" />
+            <e-book-render
+                @closeEBook="closeEBookImp"
+                id="eBookPage"
+                :show="showEBook"
+                :rendition="renditionRef"
+            />
             <div class="bookList">
                 <div
                     :key="o.id"
@@ -25,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 import Epub from 'epubjs';
 import EBookRender from './bookRender.vue';
 
@@ -39,11 +44,10 @@ export default {
             id: '10011',
             name: '三体全集',
             icon: require('@/assets/imgs/book_icon_santi.png'),
-            url: '/santi.epub',
-            url2: 'https://img1.yunser.com/epub/test.epub'
+            url: '/santi.epub'
         };
         const books = [bookObj];
-        
+
         const renditionRef: any = ref();
         const percentage = ref(0);
         const showEBook = ref(false);
@@ -52,15 +56,19 @@ export default {
             return () => {
                 const url1 = window.location.origin + item.url;
                 const book = Epub(url1);
-                book.ready.then(() => {  
-                    return book.locations.generate(0);
-                }).then(()=> {
-                    const lastPer = percentage.value;
-                    if (lastPer > 0.1) {
-                        const loc = book.locations?.cfiFromPercentage(lastPer/100.0);
-                        renditionRef.value.display(loc);
-                    }
-                });  
+                book.ready
+                    .then(() => {
+                        return book.locations.generate(0);
+                    })
+                    .then(() => {
+                        const lastPer = percentage.value;
+                        if (lastPer > 0.1) {
+                            const loc = book.locations?.cfiFromPercentage(
+                                lastPer / 100.0
+                            );
+                            renditionRef.value.display(loc);
+                        }
+                    });
                 showEBook.value = true;
 
                 const rendition = book.renderTo('eBookPage');
@@ -70,11 +78,11 @@ export default {
                 rendition.display();
             };
         };
-        const closeEBookImp = (val: {percentage: number}) => {
+        const closeEBookImp = (val: { percentage: number }) => {
             percentage.value = val.percentage;
             showEBook.value = false;
             renditionRef.value.destroy();
-        }
+        };
 
         const onTabClick = () => {
             //todo

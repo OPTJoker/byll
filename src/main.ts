@@ -1,4 +1,6 @@
 import { createApp } from 'vue';
+import { createStore } from 'vuex';
+
 import App from './App.vue';
 import router from './router';
 import { SetRootFontSize } from '@/utils/uitool';
@@ -7,28 +9,34 @@ import ElementPlus from 'element-plus';
 import 'element-plus/lib/theme-chalk/index.css';
 import '@/assets/styles/reset.scss';
 
-SetRootFontSize();
 const app = createApp(App);
-app.use(router).use(ElementPlus).mount('#app');
+const store = makeStore();
+app.use(store).use(router).use(ElementPlus).mount('#app');
+ConfigUpApp();
 
-window.addEventListener('resize', () => {
+function ConfigUpApp() {
     SetRootFontSize();
-});
+    window.addEventListener('resize', () => {
+        SetRootFontSize();
+    });
+}
 
-window.addEventListener(
-    'dblclick',
-    function () {
-        toggleFullScreen();
-    },
-    false
-);
-
-function toggleFullScreen() {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-    } else {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
+function makeStore() {
+    const store = createStore({
+        state() {
+            return {
+                bookInfo: {
+                    id: 0,
+                    name: '',
+                    progress: 0
+                }
+            };
+        },
+        mutations: {
+            saveBookProgress(state: any, bookInfo) {
+                state.info = bookInfo;
+            }
         }
-    }
+    });
+    return store;
 }

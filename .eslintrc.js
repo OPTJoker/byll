@@ -25,14 +25,14 @@ module.exports = {
         "@typescript-eslint"
     ],
     rules: {
-        "no-var-requires": true,
+        "no-var-requires": 0,
         "block-spacing": [2, "always"],
         "prettier/prettier": 2,
         "allowTypedFunctionExpressions": 0,
         "allowArgumentsExplicitlyTypedAsAny": 0,
         "allowDirectConstAssertionInArrowFunctions": 0,
-        "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/explicit-function-return-type": "off",
-        "@typescript-eslint/explicit-module-boundary-types": "off"
+        "@typescript-eslint/no-explicit-any": 0,
+        "@typescript-eslint/explicit-function-return-type": 0,
+        "@typescript-eslint/explicit-module-boundary-types": 0
     },
 }
