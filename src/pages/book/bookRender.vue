@@ -17,7 +17,11 @@
                 :format-tooltip="formatProgress"
                 step="0.1"
                 @change="onProgressChange"
-            ></el-slider>
+            />
+            <div class="control">
+                <div class="fontBtn" :onClick="smallerFont">a</div>
+                <div class="fontBtn" :onClick="biggerFont">A</div>
+            </div>
         </div>
     </div>
 </template>
@@ -30,10 +34,9 @@ export default {
     name: 'EBookRender',
     props: {
         show: Boolean,
-        closeEBook: Function,
         rendition: Rendition
     },
-    emits: ['closeEBook'],
+    emits: ['closeEBook', 'biggerFont', 'smallerFont'],
     setup(props, ctx) {
         const renditionRef = () => {
             return props.rendition;
@@ -79,10 +82,23 @@ export default {
         const formatProgress = (val: number) => {
             return val + ' %';
         };
+
+        const biggerFont = () => {
+            console.log('call big');
+            ctx.emit('biggerFont');
+        };
+
+        const smallerFont = () => {
+            console.log('call small');
+            ctx.emit('smallerFont');
+        };
+
         return {
             next,
             prev,
             progress,
+            biggerFont,
+            smallerFont,
             hideSetting,
             onBackClick,
             formatProgress,
@@ -146,14 +162,43 @@ export default {
         align-items: center;
         justify-content: center;
 
+        padding-top: rem(20);
+        padding-bottom: rem(20);
         width: 100%;
-        height: rem(60);
+        flex-shrink: 1;
         bottom: 0;
         background-color: aquamarine;
 
         .slider {
-            width: 80%;
+            display: block;
+
+            width: 90%;
             height: rem(44);
+
+            div {
+                display: block;
+            }
+        }
+
+        .control {
+            width: 90%;
+            height: rem(40);
+            justify-content: space-between;
+
+            .fontBtn {
+                justify-content: center;
+                align-items: center;
+                border-style: solid;
+                font-size: rem(18);
+                height: rem(40);
+                width: rem(40);
+                border-radius: rem(20);
+                box-shadow: 0px 0px 6px rgba($color: #000000, $alpha: 0.1);
+            }
+
+            &:nth-child(1) {
+                font-size: rem(10);
+            }
         }
     }
 }

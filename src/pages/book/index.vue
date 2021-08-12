@@ -3,6 +3,8 @@
         <div class="window">
             <e-book-render
                 @closeEBook="closeEBookImp"
+                @biggerFont="biggerFont"
+                @smallerFont="smallerFont"
                 id="eBookPage"
                 :show="showEBook"
                 :rendition="renditionRef"
@@ -49,6 +51,7 @@ export default {
         const books = [bookObj];
 
         const renditionRef: any = ref();
+        const fontSize = ref(18);
         const percentage = ref(0);
         const showEBook = ref(false);
         const onBookClick = (i) => {
@@ -72,7 +75,7 @@ export default {
                 showEBook.value = true;
 
                 const rendition = book.renderTo('eBookPage');
-                rendition.themes.fontSize('18px');
+                rendition.themes.fontSize(fontSize.value + 'px');
                 renditionRef.value = rendition;
 
                 rendition.display();
@@ -84,12 +87,27 @@ export default {
             renditionRef.value.destroy();
         };
 
+        const biggerFont = () => {
+            fontSize.value += 2;
+            console.info('font:', fontSize.value);
+            renditionRef.value.themes.fontSize(fontSize.value + 'px');
+        };
+
+        const smallerFont = () => {
+            fontSize.value -= 2;
+            fontSize.value < 8 ? 8 : fontSize.value;
+            console.info('font:', fontSize.value);
+            renditionRef.value.themes.fontSize(fontSize.value + 'px');
+        };
+
         const onTabClick = () => {
             //todo
         };
         return {
             books,
             showEBook,
+            biggerFont,
+            smallerFont,
             onTabClick,
             onBookClick,
             renditionRef,
@@ -105,17 +123,14 @@ $coverImgScale: 1.331;
 
 .container {
     flex-direction: column;
-    width: 100%;
     flex-grow: 1;
 
     .window {
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
+        flex-grow: 1;
 
         .bookList {
             flex-direction: row;
-            flex: 1;
+            flex-grow: 1;
             margin: rem(24);
             justify-content: space-between;
             align-content: flex-start;
@@ -167,7 +182,6 @@ $coverImgScale: 1.331;
     }
 
     .tabBar {
-        flex-direction: row;
         width: 100%;
         height: rem(66);
         max-height: 68px;

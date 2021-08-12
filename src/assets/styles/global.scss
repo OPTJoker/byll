@@ -4,3 +4,7 @@
     $baseRem: 37.5;
     @return ($px/$baseRem) + rem
 }
+
+div {
+    display: flex;
+}

@@ -7,6 +7,7 @@ import { SetRootFontSize } from '@/utils/uitool';
 import ElementPlus from 'element-plus';
 
 import 'element-plus/lib/theme-chalk/index.css';
+
 import '@/assets/styles/reset.scss';
 
 const app = createApp(App);
