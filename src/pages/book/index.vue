@@ -17,7 +17,7 @@
                     v-for="(o, i) in books"
                 >
                     <div class="card-content-container">
-                        <img :src="books[i].icon" class="coverImg" />
+                        <img :src="books[i].cover" class="coverImg" />
                         <span class="title">{{ books[i].name }}</span>
                     </div>
                 </div>
@@ -36,16 +36,23 @@ import { ref } from 'vue';
 import Epub from 'epubjs';
 import EBookRender from './bookRender.vue';
 
+export interface BookInfo {
+    id: string;
+    name: string;
+    cover: string;
+    url: string;
+}
+
 export default {
     name: '电子书',
     components: {
         EBookRender
     },
     setup() {
-        const bookObj = {
-            id: '10011',
+        const bookObj: BookInfo = {
+            id: '36500001',
             name: '三体全集',
-            icon: require('@/assets/imgs/book_icon_santi.png'),
+            cover: require('@/assets/imgs/book_icon_santi.png'),
             url: '/santi.epub'
         };
         const books = [bookObj];

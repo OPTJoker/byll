@@ -4,7 +4,7 @@ import { createStore } from 'vuex';
 import App from './App.vue';
 import router from './router';
 import { SetRootFontSize } from '@/utils/uitool';
-import ElementPlus from 'element-plus';
+import { ElSlider } from 'element-plus';
 
 import 'element-plus/lib/theme-chalk/index.css';
 
@@ -12,7 +12,7 @@ import '@/assets/styles/reset.scss';
 
 const app = createApp(App);
 const store = makeStore();
-app.use(store).use(router).use(ElementPlus).mount('#app');
+app.use(store).use(router).use(ElSlider).mount('#app');
 ConfigUpApp();
 
 function ConfigUpApp() {
