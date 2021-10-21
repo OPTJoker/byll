@@ -21,6 +21,9 @@
             >
             </ModuleItem>
         </div>
+        <a href="https://beian.miit.gov.cn/" class="beian"
+            >京ICP备2021014213号-1</a
+        >
     </div>
 </template>
 
@@ -76,6 +79,13 @@ export default {
     width: 100vw;
     height: 100vh;
 
+    .beian {
+        align-self: center;
+        font-size: 12px;
+        font-weight: 500px;
+        color: rgba($color: #fff, $alpha: 0.3);
+        margin-bottom: 8px;
+    }
     .bgContainer {
         top: 0;
         margin: 0;
